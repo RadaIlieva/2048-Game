@@ -36,7 +36,8 @@ body {
 .grid-cell {
     width: 100px;
     height: 100px;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     background-color: #cdc1b4;
     border-radius: 5px;
     display: flex;
@@ -46,6 +47,42 @@ body {
     font-weight: bold;
     color: #776e65;
 }
+
+.message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-content {
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+#win-message .message-content {
+    background-color: #00f; 
+    border: 5px solid #00f;
+}
+
+#lose-message .message-content {
+    background-color: #f00;
+    border: 5px solid #f00;
+}
+
+.hidden {
+    display: none;
+}
+
 
 .grid-cell[data-value="2"] {
     background-color: #6a7e7a;

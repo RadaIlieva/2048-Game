@@ -113,32 +113,75 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     
+    function checkWin() {
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                if (grid[row][col] === 2048) {
+                    document.getElementById('win-message').classList.remove('hidden'); // Показваме съобщението за победа
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function checkGameOver() {
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                if (grid[row][col] === 0) return false;
+            }
+        }
+    
+        for (let row = 0; row < 4; row++) {
+            for (let col = 0; col < 4; col++) {
+                if (col < 3 && grid[row][col] === grid[row][col + 1]) return false;
+                if (row < 3 && grid[row][col] === grid[row + 1][col]) return false;
+            }
+        }
+    
+        document.getElementById('lose-message').classList.remove('hidden'); // Показваме съобщението за загуба
+        return true;
+    }
+
+
     document.addEventListener('keydown', (e) => {
+        let moved = false;
         switch (e.key) {
             case 'ArrowUp':
             case 'w':
                 slideUp();
+                moved = true;
                 break;
             case 'ArrowDown':
             case 's':
                 slideDown();
+                moved = true;
                 break;
             case 'ArrowLeft':
             case 'a':
                 slideLeft();
+                moved = true;
                 break;
             case 'ArrowRight':
             case 'd':
                 slideRight();
+                moved = true;
                 break;
             default:
                 break;
         }
-        generateTile(); 
-        updateGrid(); 
+        
+        if (moved) {
+            generateTile();
+            updateGrid();
+
+           
+            if (!checkWin()) {
+                checkGameOver();
+            }
+        }
     });
 
-    
     generateTile();
     generateTile();
     updateGrid();
